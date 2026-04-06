@@ -5,7 +5,7 @@ let msgContainer = document.querySelector('.msgContainer');
 let msg = document.querySelector('.msg');
 let turn = document.querySelector('#turn');
 let turnO = true; //player X, player O
-
+let turnSound = new Audio("ting.mp3");
 
 let cnt = 0;
 // 2D array
@@ -22,6 +22,7 @@ const winPatterns = [
 
 boxes.forEach((box) => {
     box.addEventListener("click", () => {
+        turnSound.play();
         box.innerText = (turnO) ? 'O' : 'X';
         turn.innerText = (!turnO) ? 'Turn : O' : 'Turn : X';
         (box.innerText === 'O') ? box.style.color = '#13E000' : box.style.color = '#EE1B29';
