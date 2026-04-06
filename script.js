@@ -6,6 +6,8 @@ let msg = document.querySelector('.msg');
 let turn = document.querySelector('#turn');
 let turnO = true; //player X, player O
 
+
+let cnt = 0;
 // 2D array
 const winPatterns = [
     [0,1,2],
@@ -27,6 +29,10 @@ boxes.forEach((box) => {
         box.disabled = true;
         console.log('box clicked !');
         checkWinner();
+        cnt++;
+        if(cnt === 9){
+            draw();
+        }
     });
 });
 
@@ -53,6 +59,12 @@ const checkWinner = () => {
     }
 }
 
+const draw = () => {
+    msg.innerText = ` It's a Draw `;
+    msgContainer.classList.remove('hide');
+    document.querySelector('.gif').classList.add('hide');
+    disabledBoxes();
+}
 const disabledBoxes = () => {
     for(let box of boxes){
         box.disabled = true;
@@ -68,12 +80,14 @@ const enabledBoxes = () => {
 const showWinner = (winner) => {
     msg.innerText = `Congratulations, Winner is ${winner}`;
     msgContainer.classList.remove('hide');
+    document.querySelector('.gif').classList.remove('hide');
     disabledBoxes();
 }
 
 
 const resetGame = () => {
     turnO = true;
+    turn.innerText = "Turn : O";
     enabledBoxes();
     msgContainer.classList.add('hide');
 }
